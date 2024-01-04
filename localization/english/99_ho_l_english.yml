@@ -1,0 +1,29 @@
+﻿l_english:
+  ### Buildings
+  # Great Shrine Group
+  building_type_ho_great_shrine_01:0 "Great Shrine"
+  building_type_ho_great_shrine_01_desc:0 "The shrine houses the remains of the great man. The ever-expanding complex includes a mausoleum, as well as a chapel, library, bazaar, and other facilities that have developed eclectically but brilliantly with the traffic of pilgrims and caravans."
+  # lv 1
+  building_ho_great_shrine_01:0 "$building_type_ho_great_shrine_01$"
+  building_ho_great_shrine_01_desc:0 "$building_type_ho_great_shrine_01_desc$"
+
+
+  ### Decision
+  build_great_project_decision_name:0 "Build Great Project"
+  build_great_project_decision_desc:0 "A great man recently passed away. It is important to me and to future generations to create a mausoleum to house the remains of that person."
+  build_great_project_decision_tooltip:0 "Build a [special_building|e]"
+  build_great_project_decision_confirm:0 "confirm"
+  build_great_project_any_sub_realm_tt:0 "At least three [counties|e] not has [special_buildings|e]"
+
+
+  ### Events
+  # body
+  ho_decision.0001.t:0 "Great Project"
+  ho_decision.0001.desc:0 "Plans are being made to build a Shrine with a mausoleum to house the remains of the great [death_close_person.GetFirstName].\n\nWhere on earth should it be built?"
+
+  # options
+  ho_decision.0001.a:0 "[location_a.GetNameNoTier|U] would be a good place."
+  ho_decision.0001.b:0 "[location_b.GetNameNoTier|U] seems decent enough?"
+  ho_decision.0001.c:0 "[location_c.GetNameNoTier|U] makes a fine choice!"
+  ho_decision.0001.d:0 "You want me to pay #EMP HOW#! much for [death_close_person.GetFirstNameNoTooltip]?"
+  ho_decision.0001.tooltip:0 "The holding gains the [special_building|E] [GetBuilding('ho_great_shrine_01').GetName]"

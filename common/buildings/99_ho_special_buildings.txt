@@ -1,0 +1,43 @@
+﻿ho_great_shrine_01 = {
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_structure_imam_reza_shrine.dds"
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		scope:holder = {
+			religion = religion:islam_religion
+		}
+	}
+	
+	is_enabled = {
+		scope:holder = {
+			religion = religion:islam_religion
+		}
+	}
+	
+	# show_disabled = yes
+	
+	cost_gold = 1000
+
+	character_modifier = {
+		piety_level_impact_mult = 0.25
+		monthly_dynasty_prestige_mult = 0.025
+	}
+	county_modifier = {
+		tax_mult = 0.1
+		development_growth_factor = 0.125
+		development_growth = 0.15
+	}
+	
+	ai_value = {
+		base = 0
+	}
+	
+	type = special
+
+	flag = travel_point_of_interest_religious
+}

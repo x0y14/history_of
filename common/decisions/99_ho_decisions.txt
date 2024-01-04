@@ -1,0 +1,65 @@
+﻿build_great_project_decision = {
+	major = yes
+	title = build_great_project_decision_name
+	picture = "gfx/interface/illustrations/decisions/decision_smith.dds"
+	desc = build_great_project_decision_desc
+	selection_tooltip = build_great_project_decision_tooltip
+
+	cooldown = { years = 10 }
+
+	is_shown = {
+		is_landed = yes
+		primary_title.tier >= tier_kingdom
+
+		religion = religion:islam_religion
+	}
+
+	is_valid = {
+		exists = var:death_close_person
+
+		# スペシャル建物を持たない公爵領首都が2つ以上あること
+		custom_tooltip = {
+			text = build_great_project_any_sub_realm_tt
+			any_sub_realm_county = {
+				this.duchy.title_capital_county = this
+				title_province = {
+					NOT = { has_special_building_slot = yes }
+				}
+				count >= 3
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		# Standard checks.
+		is_available_adult = yes
+		# Shouldn't be at war.
+		is_at_war = no
+	}
+	
+	cost = { gold = BUILD_GREAT_PROJECT_COST }
+
+	effect = {
+		set_variable = {
+			name = build_great_project_fefund
+			value = BUILD_GREAT_PROJECT_COST
+		}
+		if = {
+			limit = {
+				exists = var:death_close_person
+			}
+			hidden_effect = {
+				var:death_close_person = {
+					save_scope_as = death_close_person
+				}
+		}
+		}
+		trigger_event = ho_decision.0001
+	}
+
+	ai_potential = { always = yes }
+	ai_goal = yes
+	ai_will_do = {
+		base = 100
+	}
+}

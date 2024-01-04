@@ -1,0 +1,141 @@
+﻿namespace = ho_decision
+
+
+# Select which type of stele you'll be raising.
+ho_decision.0001 = {
+	type = character_event
+	title = ho_decision.0001.t
+	desc = ho_decision.0001.desc
+	theme = faith
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:death_close_person
+		animation = personality_zealous
+	}
+
+	override_background = { reference = temple }
+
+	trigger = {
+		# DLC check.
+		has_fp1_dlc_trigger = yes
+	}
+
+	immediate = {
+		# スペシャル建物を持たない公爵領首都が2つ以上あること
+		every_sub_realm_county = {
+			limit = {
+				this.duchy.title_capital_county = this
+				title_province = {
+					NOT = { has_special_building_slot = yes }
+				}
+			}
+			add_to_list = duchy_capital_counties_not_has_sp_building
+		}
+
+		ordered_in_list = {
+			list = duchy_capital_counties_not_has_sp_building
+			max = 3
+			order_by = development_level
+			# Grab three options.
+			if = {
+				limit = {
+					NOT = { exists = scope:location_a }
+				}
+				save_scope_as = location_a
+			}
+			else_if = {
+				limit = {
+					NOR = {
+						this = scope:location_a
+						exists = scope:location_b
+					}
+				}
+				save_scope_as = location_b
+			}
+			else_if = {
+				limit = {
+					NOR = {
+						this = scope:location_a
+						this = scope:location_b
+						exists = scope:location_c
+					}
+				}
+				save_scope_as = location_c
+			}
+		}
+	}
+
+	# Bury an ancestor.
+	option = {
+		name = ho_decision.0001.a
+
+		custom_tooltip = {
+			text = ho_decision.0001.tooltip
+			scope:location_a.title_province = {
+				add_special_building = ho_great_shrine_01
+			}
+		}
+
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	# Commemorate a conquest.
+	option = {
+		name = ho_decision.0001.b
+		
+		custom_tooltip = {
+			text = ho_decision.0001.tooltip
+			scope:location_b.title_province = {
+				add_special_building = ho_great_shrine_01
+			}
+		}
+
+		ai_chance = {
+			base = 90
+		}
+	}
+
+	# Memorialise an increase in rank.
+	option = {
+		name = ho_decision.0001.c
+
+		custom_tooltip = {
+			text = ho_decision.0001.tooltip
+			scope:location_c.title_province = {
+				add_special_building = ho_great_shrine_01
+			}
+		}
+
+		ai_chance = {
+			base = 80
+		}
+	}
+
+
+	# cancel
+	option = {
+		name = ho_decision.0001.d
+
+		# Give 'em their deposit back.
+		add_gold = var:build_great_project_fefund
+		# Clear the cooldown.
+		remove_decision_cooldown = build_great_project_decision
+
+		# No stress impact for opting out.
+		ai_chance = {
+			# If the AI has opened the interface, it should pick an option.
+			base = 0
+		}
+	}
+
+	# Run some mild clean-up.
+	after = {
+		# Clean-up the refund value.
+		remove_variable = build_great_project_fefund
+	}
+}

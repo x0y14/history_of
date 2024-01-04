@@ -1,0 +1,9 @@
+﻿# on_realm_capital_change
+# ancestor_to_bury
+
+
+on_death = {
+	events = {
+		ho_on_death.0001
+	}
+}
